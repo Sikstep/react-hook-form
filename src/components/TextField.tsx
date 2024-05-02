@@ -1,14 +1,12 @@
-import React, {ComponentPropsWithoutRef, forwardRef} from 'react';
-//
-// type Props = {
-//     onChange: ChangeHandler;
-//     onBlur: ChangeHandler;
-//     ref: RefCallBack;
-//     name: string
-// }
+import React, {forwardRef} from 'react';
+import {ChangeHandler, RefCallBack} from 'react-hook-form';
 
-type Props = ComponentPropsWithoutRef<'input'>
-
+type Props = {
+    onChange: ChangeHandler;
+    onBlur: ChangeHandler;
+    ref: RefCallBack;
+    name: string
+}
 
 const TextField =forwardRef<HTMLInputElement,Props> ((props, ref) => {
 

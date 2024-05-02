@@ -1,4 +1,5 @@
-import React, {ComponentPropsWithoutRef, forwardRef} from 'react';
+import React from 'react';
+import {FieldValues, useController, UseControllerProps} from 'react-hook-form';
 //
 // type Props = {
 //     onChange: ChangeHandler;
@@ -7,19 +8,27 @@ import React, {ComponentPropsWithoutRef, forwardRef} from 'react';
 //     name: string
 // }
 
-type Props = ComponentPropsWithoutRef<'input'>
+// type Props = ComponentPropsWithoutRef<'input'>
 
+type Props<T extends FieldValues> = UseControllerProps<T>
 
-const TextField =forwardRef<HTMLInputElement,Props> ((props, ref) => {
+const TextField = <T extends FieldValues>({name, control}: Props<T>) => {
 
-    const {onChange, onBlur, name} = props
+    const {
+        field: {value, onChange},
+    } = useController({
+        name,
+        control,
+    })
 
     return (
         <div>
-            <input onChange={onChange} ref={ref} name={name} onBlur={onBlur} />
-            {/*{errors.login && <div style={{color:'red'}}>To short</div>}*/}
+            <input
+                onChange={onChange}
+                name={name}
+            />
         </div>
     );
-});
+};
 
 export default TextField;
